@@ -1,7 +1,7 @@
 # 🩺 Diabetes Prediction AI Project
 
 ### CAP 4630 – Intro to Artificial Intelligence  
-**Team Members:** Gabriel Abadio, Sorahya Eugene, Tom Le
+**Team Members:** Gil Abadio, Sorahya Eugene, Tom Le, Sarai Aguiar, Erin Patrician
 
 
 ---
