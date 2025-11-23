@@ -1,6 +1,6 @@
 """
 train.py
-Trains machine learning models (Logistic Regression and Random Forest)
+Trains machine learning models (XGBoost and Neural Network)
 using the preprocessing pipeline.
 """
 
@@ -33,4 +33,5 @@ def train_models(csv_path: str):
 
 
 if __name__ == "__main__":
+
     train_models("data\diabetes.csv")
