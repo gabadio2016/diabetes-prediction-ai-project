@@ -212,21 +212,13 @@ def create_engineered_features(df):
 
     # BMI-based features
     if "bmi" in df_eng.columns:
-        # BMI categories: 0=underweight, 1=normal, 2=overweight, 3=obese
-        df_eng["bmi_category"] = pd.cut(
-            df_eng["bmi"], bins=[0, 18.5, 25, 30, 100], labels=[0, 1, 2, 3]
-        ).astype(float)
         df_eng["is_obese"] = (df_eng["bmi"] > 30).astype(int)
-        created_features.extend(["bmi_category", "is_obese"])
+        created_features.extend(["is_obese"])
 
     # Age-based features
     if "age" in df_eng.columns:
-        # Age groups: 0=young, 1=middle, 2=senior, 3=elderly
-        df_eng["age_group"] = pd.cut(
-            df_eng["age"], bins=[0, 30, 45, 60, 100], labels=[0, 1, 2, 3]
-        ).astype(float)
         df_eng["is_senior"] = (df_eng["age"] > 60).astype(int)
-        created_features.extend(["age_group", "is_senior"])
+        created_features.extend(["is_senior"])
 
     # Interaction features
     if "bmi" in df_eng.columns and "age" in df_eng.columns:
@@ -274,6 +266,9 @@ print(f"Total features after engineering: {X_train_eng.shape[1]}")
 print("=" * 80)
 print("STEP 6: FEATURE IMPORTANCE ANALYSIS")
 print("=" * 80)
+
+print("is Nan value: ")
+print(X_train_eng.isna().sum())
 
 # Train a Random Forest to calculate feature importance
 print("Training Random Forest for feature importance...")
