@@ -141,7 +141,7 @@ Contains shared helper utilities used across the entire project.
 
 ---
 
-## ✔ How This Folder Meets Project Requirements
+##  How This Folder Meets Project Requirements
 
  **Full preprocessing pipeline**  
  **Two best-performing models (XGBoost + NN)**  
