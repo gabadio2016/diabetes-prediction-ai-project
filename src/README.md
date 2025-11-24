@@ -4,11 +4,11 @@ This folder contains all Python source files required to run the full machine-le
 
 ---
 
-## 📦 Files Included
+##  Files Included
 
-### 1️⃣ **preprocessing.py**
+###  **preprocessing.py**
 Handles all data loading, cleaning, splitting, and feature transformation.  
-📄 Source: :contentReference[oaicite:0]{index=0}
+ Source: :contentReference[oaicite:0]{index=0}
 
 #### Key Responsibilities
 - Load the raw dataset from the `data/` folder  
@@ -28,9 +28,9 @@ Handles all data loading, cleaning, splitting, and feature transformation.
 
 ---
 
-### 2️⃣ **train.py**
+###  **train.py**
 End-to-end training script for both selected models: **XGBoost** and **Neural Network (MLPClassifier)**.  
-📄 Source: :contentReference[oaicite:1]{index=1}
+ Source: :contentReference[oaicite:1]{index=1}
 
 #### What This Script Does
 1. Loads raw CSV data  
@@ -61,9 +61,9 @@ End-to-end training script for both selected models: **XGBoost** and **Neural Ne
 
 ---
 
-### 3️⃣ **evaluate.py**
+###  **evaluate.py**
 Evaluates saved models on the **held-out test set** and generates all final analysis plots.  
-📄 Source: :contentReference[oaicite:2]{index=2}
+ Source: :contentReference[oaicite:2]{index=2}
 
 #### Pipeline
 1. Load raw data  
@@ -90,9 +90,9 @@ The script also prints a **side-by-side comparison table** of test metrics.
 
 ---
 
-### 4️⃣ **utils.py**
+###  **utils.py**
 Contains shared helper utilities used across the entire project.  
-📄 Source: :contentReference[oaicite:3]{index=3}
+ Source: :contentReference[oaicite:3]{index=3}
 
 #### Key Features
 - Global path constants:
@@ -105,7 +105,7 @@ Contains shared helper utilities used across the entire project.
 
 ---
 
-## 🧠 Overall Pipeline Flow
+##  Overall Pipeline Flow
 
                  ┌─────────────────────────┐
                  │ diabetes_prediction.csv │
@@ -143,18 +143,18 @@ Contains shared helper utilities used across the entire project.
 
 ## ✔ How This Folder Meets Project Requirements
 
-🍏 **Full preprocessing pipeline**  
-🍏 **Two best-performing models (XGBoost + NN)**  
-🍏 **Proper model saving for reproducibility**  
-🍏 **Evaluation on held-out test data**  
-🍏 **Generated visualizations for the results folder**  
-🍏 **Professional, modular, clean Python design**  
+ **Full preprocessing pipeline**  
+ **Two best-performing models (XGBoost + NN)**  
+ **Proper model saving for reproducibility**  
+ **Evaluation on held-out test data**  
+ **Generated visualizations for the results folder**  
+ **Professional, modular, clean Python design**  
 
 Everything required by your FAU AI project is implemented exactly as expected.
 
 ---
 
-## 📌 Summary
+##  Summary
 
 The `src/` folder is the core engine of the Diabetes Prediction AI system. It contains:
 
