@@ -1,4 +1,4 @@
-# 🎤 Presentation Materials — Diabetes Prediction AI Project
+#  Presentation Materials — Diabetes Prediction AI Project
 
 This folder contains the presentation assets summarizing the full workflow of the Diabetes Prediction AI Project, including the methodology, key findings, model comparisons, and final evaluation visuals. These materials are intended for use in class presentations, video walkthroughs, or project documentation.
 
@@ -119,7 +119,7 @@ This folder may contain:
 
 ---
 
-# 🗂 Related Project Components
+#  Related Project Components
 
 - **Preprocessing Code:** `src/preprocessing.py`  
 - **Training Pipeline:** `src/train.py`  
