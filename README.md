@@ -1,93 +1,237 @@
-# 🩺 Diabetes Prediction AI Project
-
-### CAP 4630 – Intro to Artificial Intelligence  
+#  Diabetes Prediction AI Project
+**Florida Atlantic University — Intro to AI (CAP 4630)**  
 **Team Members:** Gil Abadio, Sorahya Eugene, Tom Le, Sarai Aguiar, Erin Patrician
 
-
 ---
 
-## 📘 Project Summary
-This repository contains our AI project for predicting diabetes using health indicator data.  
-We applied multiple **machine learning models**—including Logistic Regression, Random Forest, XGBoost, and a Neural Network—to classify whether an individual is at risk for diabetes based on survey and biometric inputs.
+#  Project Overview
+This project implements a complete end-to-end machine learning pipeline for predicting diabetes using a dataset of behavioral, demographic, and health-related indicators. After data cleaning, feature engineering, and exploratory analysis, two high-performing models were selected:
 
-The project focuses on comparing models, evaluating accuracy, and understanding feature importance to interpret which health factors most influence diabetes prediction.
+- **XGBoost Classifier**
+- **Neural Network (MLPClassifier)**
+
+Both models were trained, validated, and evaluated on a held-out test set using metrics such as accuracy, precision, recall, F1-score, and ROC-AUC.
+
+The repository includes the dataset, exploratory notebooks, full training pipeline, test evaluation, visualizations, and saved model artifacts for reproducibility.
 
 ---
+```
+# 📁 Repository Structure
 
-## 🧩 Folder Overview
-diabetes-prediction-ai-project
 │
-├── data/ → Raw and processed dataset(s)
-├── notebooks/ → Jupyter notebooks for analysis and model training
-├── src/ → Python scripts for preprocessing and model code
-├── results/ → Output metrics, confusion matrices, and graphs
-├── presentation/ → Slides for final class presentation
+├── data/
+│ └── diabetes_prediction_dataset.csv
 │
-├── LICENSE
+├── notebooks/
+│ ├── data_quality_report.ipynb
+│ ├── feature_analysis.ipynb
+│ ├── model_selection.ipynb
+│ └── Model_Evaluation_and_Baseline_Testing_updated.ipynb
+│
+├── src/
+│ ├── preprocessing.py
+│ ├── train.py
+│ ├── evaluate.py
+│ └── utils.py
+│
+├── results/
+│ ├── preprocessor.pkl
+│ ├── xgboost.pkl
+│ ├── neural_network.pkl
+│ ├── xgboost_confusion_matrix.png
+│ ├── xgboost_roc_curve.png
+│ ├── neural_net_confusion_matrix.png
+│ └── neural_net_roc_curve.png
+│
 └── README.md
+```
+---
 
+#  Dataset Description
+**File:** `data/diabetes_prediction_dataset.csv`  
+Includes the following categories of features:
+
+### Health Metrics
+- BMI  
+- MentalHealth  
+- PhysicalHealth  
+- SleepTime  
+
+### Behavioral Indicators
+- Smoking  
+- AlcoholDrinking  
+- PhysicalActivity  
+- DiffWalking  
+
+### Demographics
+- AgeCategory  
+- Gender  
+- Race  
+
+### Target Variable
+- **diabetes**: `1` = diabetic, `0` = non-diabetic
+
+The data is cleaned, encoded, and transformed in the preprocessing pipeline.
 
 ---
 
-## ⚙️ Setup Instructions
-### Clone the repo
-```bash
-git clone https://github.com/gabadio2016/diabetes-prediction-ai-project.git
-cd diabetes-prediction-ai-project
-Install dependencies
+#  Notebooks Overview
 
-pip install pandas numpy matplotlib seaborn scikit-learn xgboost tensorflow
-🧠 Workflow Summary
-Data Preparation
+###  `data_quality_report.ipynb`
+- Checks missing values  
+- Duplicate detection  
+- Distribution plots  
+- Correlation heatmap  
 
-Cleaned the dataset, removed duplicates, and normalized numerical columns.
+###  `feature_analysis.ipynb`
+- Feature importance  
+- Key visualizations  
+- Categorical encoding validation  
 
-Encoded categorical values (Yes/No → 1/0).
+###  `Model_Evaluation_and_Baseline_Testing_updated.ipynb`
+- Baseline model performance  
+- Accuracy, Precision, Recall, F1 comparisons  
 
-Model Training
+###  `model_selection.ipynb`
+- Model experiments  
+- Cross-validation  
+- Final model selection (XGBoost + Neural Net)  
 
-Tested and compared several ML algorithms:
+---
 
-Logistic Regression
+#  Source Code (src/)
 
-Random Forest
+##  `preprocessing.py`
+Handles:
+- CSV loading  
+- **70/15/15** train/val/test stratified split  
+- Numeric/categorical column detection  
+- Missing value imputation  
+- Creation of a `ColumnTransformer`  
+  - StandardScaler → numeric  
+  - OneHotEncoder → categorical  
+- Produces:
+  - `X_train_proc`, `X_val_proc`, `X_test_proc`
+  - Saved preprocessor (`preprocessor.pkl`)
 
-XGBoost
+---
 
-Neural Network (Keras/TensorFlow)
+##  `train.py`
+Trains the two final models:
 
-Evaluation
+### ✔ XGBoost Classifier  
+- 300 trees  
+- Depth 4  
+- Learning rate 0.05  
 
-Metrics: Accuracy, Precision, Recall, F1-Score, ROC-AUC.
+### ✔ Neural Network (MLPClassifier)  
+- Hidden layers: (64, 32)  
+- ReLU activation  
+- Early stopping enabled  
 
-Visual outputs in results/ folder (confusion matrices, ROC curves).
+Outputs:
+- Validation metrics printed to console  
+- Saves:
+  - `preprocessor.pkl`
+  - `xgboost.pkl`
+  - `neural_network.pkl`
 
-Presentation
+---
 
-Summary slides of our methodology and model results are in the presentation/ folder.
+##  `evaluate.py`
+Performs final test evaluation:
 
-📊 Example Output
-Model	Accuracy	AUC	Notes
-Logistic Regression	~0.84	0.87	Fast, interpretable
-Random Forest	~0.88	0.91	Good balance
-XGBoost	~0.89	0.92	Best overall
-Neural Network	~0.90	0.93	Slightly higher accuracy, longer training
+- Reloads and re-splits dataset  
+- Applies saved preprocessor  
+- Loads trained models  
+- Computes final test metrics:
+  - Accuracy  
+  - Precision  
+  - Recall  
+  - F1-Score  
+  - ROC-AUC  
+- Saves:
+  - Confusion Matrices  
+  - ROC Curves  
+- Prints a side-by-side comparison table
 
-(Exact metrics and graphs available in /results/.)
+---
 
-🧰 Tech Stack
-Python 3.10+
+##  `utils.py`
+Provides:
+- Dataset and results directory paths  
+- Directory creation functions  
+- Random seed control for reproducibility  
 
-Libraries: Pandas, NumPy, Matplotlib, Seaborn, Scikit-Learn, XGBoost, TensorFlow
+---
 
-Tools: Jupyter Notebook, Google Colab
+#  Results Summary (Test Set)
 
-🚀 Next Steps
-Tune hyperparameters for better model performance
+##  XGBoost
+- **AUC:** ~0.979  
+- Excellent separation between classes  
+- Very low false positives  
 
-Implement model explainability (SHAP values)
+Confusion Matrix:  
+![XGB CM](results/xgboost_confusion_matrix.png)
 
-Deploy simple Streamlit or Flask interface for live predictions
+ROC Curve:  
+![XGB ROC](results/xgboost_roc_curve.png)
 
-🧾 Dataset
-Based on CDC Diabetes Health Indicators dataset, including metrics such as BMI, blood pressure, cholesterol, smoking habits, and physical activity levels.
+---
+
+##  Neural Network
+- **AUC:** ~0.976  
+- Slightly more false positives/negatives than XGBoost  
+
+Confusion Matrix:  
+![NN CM](results/neural_net_confusion_matrix.png)
+
+ROC Curve:  
+![NN ROC](results/neural_net_roc_curve.png)
+
+---
+
+#  Full Machine Learning Pipeline
+
+                 ┌─────────────────────────┐
+                 │ diabetes_prediction.csv │
+                 └──────────────┬──────────┘
+                                │
+                                ▼
+                    preprocessing.py
+                ┌───────────────────────────┐
+                │ load_raw_data()           │
+                │ train_val_test_split()    │
+                │ fit_transform_preprocessor│
+                └──────────────┬────────────┘
+                               │
+                               ▼
+                         train.py
+                ┌───────────────────────────┐
+                │ Train XGBoost             │
+                │ Train Neural Net          │
+                │ Compute validation metrics│
+                │ Save models + preprocessor│
+                └──────────────┬────────────┘
+                               │
+                               ▼
+                        evaluate.py
+           ┌────────────────────────────────────────┐
+           │ Load saved models + preprocessor       │
+           │ Recreate train/val/test split          │
+           │ Transform X_test                       │
+           │ Evaluate XGBoost + NN                  │
+           │ Save Confusion Matrices                │
+           │ Save ROC Curves                        │
+           └────────────────────────────────────────┘
+
+---
+
+#  Conclusion
+This project successfully implements a robust, fully reproducible ML workflow for diabetes prediction. XGBoost slightly outperforms the neural network in all major metrics, but both models achieve excellent predictive performance (AUC ≈ 0.98). The repository includes all work: data inspection, feature analysis, training, evaluation, visualization, and saved artifacts.
+
+---
+
+#  License
+This project is for academic use as part of Florida Atlantic University’s Intro to AI coursework.
